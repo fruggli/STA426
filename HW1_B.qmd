@@ -1,0 +1,53 @@
+---
+title: "Week 1 Exercise Part B"
+author: "fruggli"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load-packages
+#| include: false
+
+library("MASS")
+library(tidyverse)
+set.seed(42)
+```
+
+## Samples
+
+In the first step we are creating 100 samples with a negative binomial distribution ( mu=10, dispersion=2, using the parameterisation with mean=mu and variance=mu+mu\^2\*dispersion). We are using a seed to make the data reproducible.
+
+```{r}
+
+negbin_data <- rnegbin(100, mu = 10, theta = 2)
+
+log_data <- log(negbin_data)
+
+mean_dat <- mean(negbin_data)
+var_dat <- var(negbin_data)
+
+```
+
+## Histogram of sampled data
+
+In the next step we are visualizing the samples in two histogram plots. In the first one with a linear scale and the second one with a log scale.
+
+```{r}
+#| echo: false
+par(mfrow = c(1,2))
+
+hist(negbin_data, main = 'Histogram of sampled data')
+hist(log_data, main = 'Histogram of log scaled data')
+```
+
+## Mean and Variance of the data
+
+The mean and variance of the sampled data are:
+
+```{r}
+#| echo: false
+
+print(paste("Mean:", mean_dat))
+print(paste("Variance:", var_dat))
+```
